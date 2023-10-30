@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Example class using {@link List} and {@link Map}.
@@ -30,7 +31,7 @@ public final class UseListsAndMaps {
         ArrayList<Integer> list = new ArrayList<>();
 
         for(int i = 0; i < ELEMS; i++) {
-            list.add( (int)(Math.random() * (UPPER - LOWER)) + LOWER );
+            list.add(random_in_range(UPPER, LOWER));
         }
         /*
          * 2) Create a new LinkedList<Integer> and, in a single line of code
@@ -59,6 +60,13 @@ public final class UseListsAndMaps {
          * using the previous lists. In order to measure times, use as example
          * TestPerformance.java.
          */
+        long time = System.nanoTime();
+        for (int i = 0; i < 100_000; i++) {
+            list.add(0, random_in_range(UPPER, LOWER));
+            linked.add(0, random_in_range(UPPER, LOWER));
+        }
+        time = System.nanoTime() - time;
+        final var millis = TimeUnit.NANOSECONDS.toMillis(time);
         /*
          * 6) Measure the performance of reading 1000 times an element whose
          * position is in the middle of the collection for both ArrayList and
@@ -84,5 +92,9 @@ public final class UseListsAndMaps {
         /*
          * 8) Compute the population of the world
          */
+    }
+
+    private static int random_in_range(int upper, int lower) {
+        return (int)(Math.random() * (upper - lower)) + lower;
     }
 }
