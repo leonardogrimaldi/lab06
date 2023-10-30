@@ -15,6 +15,7 @@ public final class UseListsAndMaps {
     private static final int LOWER = 1000;
     private static final int UPPER = 2000 - 1; // 2000 excluded, so 1999
     private static final int ELEMS = 1000;
+    private static final int PERFORMANCE_ELEMS = 100_000;
 
     private UseListsAndMaps() {
     }
@@ -61,12 +62,19 @@ public final class UseListsAndMaps {
          * TestPerformance.java.
          */
         long time = System.nanoTime();
-        for (int i = 0; i < 100_000; i++) {
+        for (int i = 0; i < PERFORMANCE_ELEMS; i++) {
             list.add(0, random_in_range(UPPER, LOWER));
             linked.add(0, random_in_range(UPPER, LOWER));
         }
         time = System.nanoTime() - time;
         final var millis = TimeUnit.NANOSECONDS.toMillis(time);
+        System.out.println(
+            "Adding " 
+            + PERFORMANCE_ELEMS
+            + " as the first element of the collection ArrayList and LinkedList took " 
+            + millis
+            + "ms"
+        );
         /*
          * 6) Measure the performance of reading 1000 times an element whose
          * position is in the middle of the collection for both ArrayList and
