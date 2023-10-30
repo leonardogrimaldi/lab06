@@ -67,7 +67,7 @@ public final class UseListsAndMaps {
             linked.add(0, random_in_range(UPPER, LOWER));
         }
         time = System.nanoTime() - time;
-        final var millis = TimeUnit.NANOSECONDS.toMillis(time);
+        var millis = TimeUnit.NANOSECONDS.toMillis(time);
         System.out.println(
             "Adding " 
             + PERFORMANCE_ELEMS
@@ -81,6 +81,21 @@ public final class UseListsAndMaps {
          * LinkedList, using the collections of point 5. In order to measure
          * times, use as example TestPerformance.java.
          */
+        time = System.nanoTime();
+        for (int i = 0; i < 1000; i++) {
+            /* Middle element */
+            list.get(ELEMS / 2);
+            linked.get(ELEMS / 2);
+        }
+        
+        time = System.nanoTime() - time;
+        millis = TimeUnit.NANOSECONDS.toMillis(time);
+        System.out.println(
+            "Reading the element in the middle of the ArrayList and LinkedList 1000 times took " 
+            + millis
+            + "ms"
+        );
+
         /*
          * 7) Build a new Map that associates to each continent's name its
          * population:
