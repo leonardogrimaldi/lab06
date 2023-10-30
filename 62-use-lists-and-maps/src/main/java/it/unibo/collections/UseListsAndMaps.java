@@ -1,6 +1,8 @@
 package it.unibo.collections;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -112,9 +114,22 @@ public final class UseListsAndMaps {
          *
          * Oceania -> 38,304,000
          */
+        Map<String, Long> cMap = new HashMap<>();
+        cMap.put("Africa", 1_110_635_000L);
+        cMap.put("Americas", 972_005_000L);
+        cMap.put("Antartica", 0L);
+        cMap.put("Asia" , 4_298_723_000L);
+        cMap.put("Europe" , 742_452_000L);
+        cMap.put("Oceania", 38_304_000L);
         /*
          * 8) Compute the population of the world
          */
+        long worldPopulation = 0L;
+        Collection<Long> v = cMap.values();
+        for(Long value : v) {
+            worldPopulation = value + worldPopulation;
+        }
+        System.out.println("World population " + worldPopulation);
     }
 
     private static int random_in_range(int upper, int lower) {
