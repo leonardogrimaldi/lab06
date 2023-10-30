@@ -31,29 +31,29 @@ public final class UseListsAndMaps {
          * 1) Create a new ArrayList<Integer>, and populate it with the numbers
          * from 1000 (included) to 2000 (excluded).
          */
-        ArrayList<Integer> list = new ArrayList<>();
+        final ArrayList<Integer> list = new ArrayList<>();
 
         for(int i = 0; i < ELEMS; i++) {
-            list.add(random_in_range(UPPER, LOWER));
+            list.add(randomInRange(UPPER, LOWER));
         }
         /*
          * 2) Create a new LinkedList<Integer> and, in a single line of code
          * without using any looping construct (for, while), populate it with
          * the same contents of the list of point 1.
          */
-        LinkedList<Integer> linked = new LinkedList<>(list);
+        final LinkedList<Integer> linked = new LinkedList<>(list);
         /*
          * 3) Using "set" and "get" and "size" methods, swap the first and last
          * element of the first list. You can not use any "magic number".
          * (Suggestion: use a temporary variable)
          */
-        final Integer temp = list.get(0);
+        final int temp = list.get(0);
         list.set(0, list.get(ELEMS - 1));
         list.set(ELEMS - 1, temp);
         /*
          * 4) Using a single for-each, print the contents of the arraylist.
          */
-        for (Integer i : list) {
+        for (final int i : list) {
             System.out.println(i);
         }
         /*
@@ -65,8 +65,8 @@ public final class UseListsAndMaps {
          */
         long time = System.nanoTime();
         for (int i = 0; i < PERFORMANCE_ELEMS; i++) {
-            list.add(0, random_in_range(UPPER, LOWER));
-            linked.add(0, random_in_range(UPPER, LOWER));
+            list.add(0, randomInRange(UPPER, LOWER));
+            linked.add(0, randomInRange(UPPER, LOWER));
         }
         time = System.nanoTime() - time;
         var millis = TimeUnit.NANOSECONDS.toMillis(time);
@@ -125,14 +125,13 @@ public final class UseListsAndMaps {
          * 8) Compute the population of the world
          */
         long worldPopulation = 0L;
-        Collection<Long> v = cMap.values();
-        for(Long value : v) {
+        for(final long value : cMap.values()) {
             worldPopulation = value + worldPopulation;
         }
         System.out.println("World population " + worldPopulation);
     }
 
-    private static int random_in_range(int upper, int lower) {
+    private static int randomInRange(int upper, int lower) {
         return (int)(Math.random() * (upper - lower)) + lower;
     }
 }
