@@ -1,5 +1,7 @@
 package it.unibo.collections;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +10,10 @@ import java.util.Map;
  *
  */
 public final class UseListsAndMaps {
+
+    private static final int LOWER = 1000;
+    private static final int UPPER = 2000 - 1; // 2000 excluded, so 1999
+    private static final int ELEMS = 1000;
 
     private UseListsAndMaps() {
     }
@@ -21,19 +27,31 @@ public final class UseListsAndMaps {
          * 1) Create a new ArrayList<Integer>, and populate it with the numbers
          * from 1000 (included) to 2000 (excluded).
          */
+        ArrayList<Integer> list = new ArrayList<>();
+
+        for(int i = 0; i < ELEMS; i++) {
+            list.add( (int)(Math.random() * (UPPER - LOWER)) + LOWER );
+        }
         /*
          * 2) Create a new LinkedList<Integer> and, in a single line of code
          * without using any looping construct (for, while), populate it with
          * the same contents of the list of point 1.
          */
+        LinkedList<Integer> linked = new LinkedList<>(list);
         /*
          * 3) Using "set" and "get" and "size" methods, swap the first and last
          * element of the first list. You can not use any "magic number".
          * (Suggestion: use a temporary variable)
          */
+        final Integer temp = list.get(0);
+        list.set(0, list.get(ELEMS - 1));
+        list.set(ELEMS - 1, temp);
         /*
          * 4) Using a single for-each, print the contents of the arraylist.
          */
+        for (Integer i : list) {
+            System.out.println(i);
+        }
         /*
          * 5) Measure the performance of inserting new elements in the head of
          * the collection: measure the time required to add 100.000 elements as
